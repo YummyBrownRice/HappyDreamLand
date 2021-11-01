@@ -9,7 +9,6 @@ IDEV/[Bb]uild/
 IDEV/[Bb]uilds/
 IDEV/[Ll]ogs/
 IDEV/[Mm]emoryCaptures/
-IDEV/[Uu]ser[Ss]ettings/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !IDEV/[Aa]ssets/**/*.meta
