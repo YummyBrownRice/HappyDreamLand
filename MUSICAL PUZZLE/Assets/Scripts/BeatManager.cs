@@ -35,13 +35,32 @@ public class BeatManager : MonoBehaviour
 
         if (timer < 0)
         {
+            bool[] playing = new bool[audioSources.Length];
             foreach (var sequence in sequenceList)
             {
+                for (int i = 0; i < audioSources.Length; i++)
+                {
+                    playing[i] = false;
+                    if (sequence.sequence[index % (sequence.sequence.Length)].HasFlag((Sequence.Beat)(i+1)))
+                    {
+                        playing[i] = true;
+                    }
+                }
+                /*
                 int a = (int)sequence.sequence[index % (sequence.sequence.Length)] - 1;
                 if (a >= 0)
                 {
                     audioSources[a].Play();
                     Debug.Log("Played" + (Sequence.Beat)a);
+                }
+                */
+            }
+
+            for (int i = 0; i < audioSources.Length; i++)
+            {
+                if (playing[i])
+                {
+                    audioSources[i].Play();
                 }
             }
             index++;

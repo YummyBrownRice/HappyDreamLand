@@ -1,15 +1,16 @@
 using UnityEngine.Audio;
 using UnityEngine;
+using System;
 
 [System.Serializable]
 public class Sequence
 {
     public Beat[] sequence;
 
-    public enum Beat
+    [Flags] public enum Beat
     {
-        Blank,
-        Kick,
-        HiHat
+        None = 0,
+        Kick = 1,
+        HiHat = 2
     }
 }
