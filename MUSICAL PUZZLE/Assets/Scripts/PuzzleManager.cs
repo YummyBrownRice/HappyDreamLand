@@ -7,7 +7,7 @@ public class PuzzleManager : MonoBehaviour
     public List<Node> nodes;
     private BeatManager beatManager;
 
-    private void Start()
+    private void Awake()
     {
         beatManager = GameObject.Find("SoundManager").GetComponent<BeatManager>();
     }
@@ -16,5 +16,7 @@ public class PuzzleManager : MonoBehaviour
     {
         List <Sequence> newSequences = new List<Sequence>();
         newSequences.Add(nodes[nodes.Count - 1].Output);
+
+        beatManager.sequenceList = newSequences;
     }
 }

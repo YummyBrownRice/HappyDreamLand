@@ -5,7 +5,7 @@ using UnityEngine;
 public class NodeManager : MonoBehaviour
 {
     private PuzzleManager puzzleManager;
-    void Awake()
+    void Start()
     {
         puzzleManager = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>();
         UpdatePuzzle();
@@ -22,6 +22,12 @@ public class NodeManager : MonoBehaviour
             nodeComp.index = i;
             i++;
         }
+
+        foreach (Node node in puzzleManager.nodes)
+        {
+
+        }
+
         puzzleManager.UpdateBeat();
     }
 }

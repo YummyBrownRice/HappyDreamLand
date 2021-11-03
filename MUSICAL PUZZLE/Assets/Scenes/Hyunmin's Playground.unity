@@ -391,5 +391,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputNodes: 
   outputNode: 0
+  index: 0
   sourceSound:
-    sequence: 
+    sequence: 01000000ffffffff0000000002000000
