@@ -11,7 +11,7 @@ public class Node: MonoBehaviour
 
     protected List<Sequence> input;
     private Sequence output;
-    private PuzzleManager puzzleManager;
+    private NodeManager nodeManager;
 
     public Sequence Output
     {
@@ -27,7 +27,7 @@ public class Node: MonoBehaviour
 
     private void Start()
     {
-        puzzleManager = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>();
+        nodeManager = GameObject.Find("NodeManager").GetComponent<NodeManager>();
     }
 
     public virtual void Process()

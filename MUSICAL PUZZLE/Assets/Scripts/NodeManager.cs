@@ -4,30 +4,34 @@ using UnityEngine;
 
 public class NodeManager : MonoBehaviour
 {
-    private PuzzleManager puzzleManager;
+    public List<Node> nodes;
+    private BeatManager beatManager;
+    private void Awake()
+    {
+        beatManager = GameObject.Find("SoundManager").GetComponent<BeatManager>();
+    }
+
     void Start()
     {
-        puzzleManager = GameObject.Find("PuzzleManager").GetComponent<PuzzleManager>();
         UpdatePuzzle();
     }
 
-    public void UpdatePuzzle()
+    public void UpdatePuzzle ()
     {
-        puzzleManager.nodes = new List<Node>();
-        int i = 0;
+        List<Node> tempList = new List<Node>();
         foreach (Transform node in transform)
         {
-            Node nodeComp = node.GetComponent<Node>();
-            puzzleManager.nodes.Add(nodeComp);
-            nodeComp.index = i;
-            i++;
+            tempList.Add(node.GetComponent<Node>());
         }
 
-        foreach (Node node in puzzleManager.nodes)
-        {
+        UpdateBeat();
+    }
+    public void UpdateBeat()
+    {
+        List<Sequence> newSequences = new List<Sequence>();
 
-        }
+        //Find terminal nodes for playing sounds
 
-        puzzleManager.UpdateBeat();
+        beatManager.sequenceList = newSequences;
     }
 }
