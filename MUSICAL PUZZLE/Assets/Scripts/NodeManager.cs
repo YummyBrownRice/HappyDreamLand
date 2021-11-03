@@ -30,16 +30,16 @@ public class NodeManager : MonoBehaviour
 
     public bool dfs(int u, ref List<Sequence> newSequences)
     {
-        if (nodes[u].outputCount == 0 && nodes[u].inputCount == nodes[u].inputNodes.Count)
+        if (nodes[u].outputNodes.Count == 0 && nodes[u].inputCount == nodes[u].inputNodes.Count)
         {
             nodes[u].Process();
             newSequences.Add(nodes[u].Output);
             return true;
         }
         bool flag = nodes[u].inputCount == nodes[u].inputNodes.Count;
-        for (int i = 0; i < nodes[u].outputCount; i++)
+        for (int i = 0; i < nodes[u].outputNodes.Count; i++)
         {
-            flag = flag && !dfs(nodes[u].outputNode[i], ref newSequences);
+            flag = flag && !dfs(nodes[u].outputNodes[i], ref newSequences);
         }
         if (flag)
         {
