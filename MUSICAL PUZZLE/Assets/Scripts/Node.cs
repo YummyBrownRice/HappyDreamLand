@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node: MonoBehaviour
+public class Node : MonoBehaviour
 {
 
     public List<int> inputNodes;
-    public int outputNode;
+    public int inputCount;
+    public List<int> outputNode;
     public int index;
 
     protected List<Sequence> input;
@@ -27,7 +28,7 @@ public class Node: MonoBehaviour
 
     private void Start()
     {
-        nodeManager = GameObject.Find("NodeManager").GetComponent<NodeManager>();
+        nodeManager = GameObject.Find("Nodes").GetComponent<NodeManager>();
     }
 
     public virtual void Process()

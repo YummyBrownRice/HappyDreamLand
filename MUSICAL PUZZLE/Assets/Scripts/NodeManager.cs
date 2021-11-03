@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NodeManager : MonoBehaviour
 {
-    public List<Node> nodes;
+    public Node[] nodes;
     private BeatManager beatManager;
     private void Awake()
     {
@@ -16,19 +16,24 @@ public class NodeManager : MonoBehaviour
         UpdatePuzzle();
     }
 
-    public void UpdatePuzzle ()
+    public void UpdatePuzzle()
     {
-        List<Node> tempList = new List<Node>();
+
         foreach (Transform node in transform)
         {
-            tempList.Add(node.GetComponent<Node>());
+            Node n = node.GetComponent<Node>();
+            nodes[n.index] = n;
         }
 
         UpdateBeat();
     }
+
     public void UpdateBeat()
     {
         List<Sequence> newSequences = new List<Sequence>();
+
+        int root = 0;
+
 
         //Find terminal nodes for playing sounds
 
