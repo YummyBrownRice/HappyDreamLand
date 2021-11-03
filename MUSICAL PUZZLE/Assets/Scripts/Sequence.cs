@@ -7,6 +7,10 @@ public class Sequence
 {
     public Beat[] sequence;
 
+    public Sequence(Beat[] sequence_)
+    {
+        sequence = sequence_;
+    }
     [Flags] public enum Beat
     {
         None = 0,
