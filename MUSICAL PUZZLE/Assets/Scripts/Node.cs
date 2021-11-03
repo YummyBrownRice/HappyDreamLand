@@ -8,6 +8,7 @@ public class Node : MonoBehaviour
     public List<int> inputNodes;
     public int inputCount;
     public List<int> outputNode;
+    public int outputCount;
     public int index;
 
     protected List<Sequence> input;

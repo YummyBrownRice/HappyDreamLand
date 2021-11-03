@@ -28,11 +28,32 @@ public class NodeManager : MonoBehaviour
         UpdateBeat();
     }
 
+    public bool dfs(int u, ref List<Sequence> newSequences)
+    {
+        if (nodes[u].outputCount == 0 && nodes[u].inputCount == nodes[u].inputNodes.Count)
+        {
+            nodes[u].Process();
+            newSequences.Add(nodes[u].Output);
+            return true;
+        }
+        bool flag = nodes[u].inputCount == nodes[u].inputNodes.Count;
+        for (int i = 0; i < nodes[u].outputCount; i++)
+        {
+            flag = flag && !dfs(nodes[u].outputNode[i], ref newSequences);
+        }
+        if (flag)
+        {
+            nodes[u].Process();
+            newSequences.Add(nodes[u].Output);
+        }
+        return flag;
+    }
+
     public void UpdateBeat()
     {
         List<Sequence> newSequences = new List<Sequence>();
 
-        int root = 0;
+        dfs(0, ref newSequences);
 
 
         //Find terminal nodes for playing sounds
