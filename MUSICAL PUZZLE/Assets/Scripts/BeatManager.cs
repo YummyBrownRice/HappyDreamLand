@@ -36,6 +36,11 @@ public class BeatManager : MonoBehaviour
         if (timer < 0)
         {
             bool[] playing = new bool[audioSources.Length];
+            for (int i = 0; i < audioSources.Length; i++)
+            {
+                playing[i] = false;
+            }
+
             foreach (var sequence in sequenceList)
             {
                 if (sequence.sequence.Length == 0)
@@ -43,8 +48,7 @@ public class BeatManager : MonoBehaviour
 
                 for (int i = 0; i < audioSources.Length; i++)
                 {
-                    playing[i] = false;
-                    if (sequence.sequence[index % (sequence.sequence.Length)].HasFlag((Sequence.Beat)(i+1)))
+                    if (sequence.sequence[index % (sequence.sequence.Length)].HasFlag((Sequence.Beat)(i + 1)))
                     {
                         playing[i] = true;
                     }

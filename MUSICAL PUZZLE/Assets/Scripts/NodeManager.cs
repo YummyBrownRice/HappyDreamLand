@@ -36,37 +36,61 @@ public class NodeManager : MonoBehaviour
         UpdateBeat();
     }
 
-    public bool dfs(int u, ref List<Sequence> newSequences)
+    public bool ExtractOutput(int u, ref List<Sequence> newSequences)
     {
-        Debug.Log(u);
-        if (nodes[u].outputNodes.Count == 0 && nodes[u].inputCapacity == nodes[u].inputNodes.Count)
+        if (nodes[u].outputNodes.Count == 0 && nodes[u].inputCapacity == nodes[u].input.Count)
         {
-            nodes[u].Process();
-            Debug.Log(nodes[u].name);
-            newSequences.Add(nodes[u].Output);
+            if (!nodes[u].extracted)
+            {
+                newSequences.Add(nodes[u].Output);
+                nodes[u].extracted = true;
+            }
             return true;
         }
-        bool flag = nodes[u].inputCapacity == nodes[u].inputNodes.Count;
+        bool flag = nodes[u].inputCapacity == nodes[u].input.Count;
         //Debug.Log(nodes[u].outputNodes[0]);
         for (int i = 0; i < nodes[u].outputNodes.Count; i++)
         {
-
-            flag = !dfs(nodes[u].outputNodes[i], ref newSequences) && flag;
+            flag = !ExtractOutput(nodes[u].outputNodes[i], ref newSequences) && flag;
         }
-        if (flag)
+        if (flag && !nodes[u].extracted)
         {
-            nodes[u].Process();
             newSequences.Add(nodes[u].Output);
-            Debug.Log(nodes[u].name);
+            nodes[u].extracted = true;
         }
         return flag;
+    }
+
+    public void FeedInput(int u)
+    {
+        nodes[u].extracted = false;
+        if (nodes[u].inputCapacity != nodes[u].input.Count)
+        {
+            return;
+        }
+        nodes[u].Process();
+        for (int i = 0; i < nodes[u].outputNodes.Count; i++)
+        {
+            nodes[nodes[u].outputNodes[i]].input.Add(nodes[u].Output);
+            FeedInput(nodes[u].outputNodes[i]);
+        }
     }
 
     public void UpdateBeat()
     {
         List<Sequence> newSequences = new List<Sequence>();
-
-        dfs(0, ref newSequences);
+        foreach (Node node in nodes)
+        {
+            if (node == null)
+            {
+                continue;
+            }
+            node.input.Clear();
+        }
+        FeedInput(0);
+        FeedInput(1);
+        ExtractOutput(0, ref newSequences);
+        ExtractOutput(1, ref newSequences);
 
 
         //Find terminal nodes for playing sounds

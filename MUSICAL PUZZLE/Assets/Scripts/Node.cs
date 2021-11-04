@@ -10,7 +10,9 @@ public class Node : MonoBehaviour
     public List<int> outputNodes;
     public int index;
 
-    protected List<Sequence> input;
+    public bool extracted;
+
+    public List<Sequence> input;
     private Sequence output;
     private NodeManager nodeManager;
 
