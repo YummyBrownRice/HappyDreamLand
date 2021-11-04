@@ -38,6 +38,9 @@ public class BeatManager : MonoBehaviour
             bool[] playing = new bool[audioSources.Length];
             foreach (var sequence in sequenceList)
             {
+                if (sequence.sequence.Length == 0)
+                    continue;
+
                 for (int i = 0; i < audioSources.Length; i++)
                 {
                     playing[i] = false;

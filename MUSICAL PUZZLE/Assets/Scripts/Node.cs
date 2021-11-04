@@ -6,7 +6,7 @@ public class Node : MonoBehaviour
 {
 
     public List<int> inputNodes;
-    public int inputCount;
+    public int inputCapacity;
     public List<int> outputNodes;
     public int index;
 
