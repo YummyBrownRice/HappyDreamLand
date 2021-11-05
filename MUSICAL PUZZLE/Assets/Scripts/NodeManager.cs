@@ -20,7 +20,9 @@ public class NodeManager : MonoBehaviour
     {
         UpdatePuzzle();
         AddNode(nodeKinds[1], new Vector2(-1, -2));
-        AddConnection(0, 2, 0);
+        AddNode(nodeKinds[2], new Vector2(3, 3));
+        AddConnection(0, 3, 0);
+        AddConnection(3, 2, 0);
         AddConnection(1, 2, 1);
     }
 
@@ -38,13 +40,15 @@ public class NodeManager : MonoBehaviour
         UpdateBeat();
     }
 
-    public bool ExtractOutput(int u, ref List<Sequence> newSequences)
+    public bool ExtractOutput(int u, ref List<Sequence> newSequences) //BeatManager로 보낼 최종 sequence list를 추출
     {
         if (nodes[u].outputNodes.Count == 0 && nodes[u].inputCapacity == nodes[u].inputCount)
         {
             if (!nodes[u].extracted)
             {
                 newSequences.Add(nodes[u].Output);
+                Debug.Log("Hm,m");
+                Debug.Log(u);
                 nodes[u].extracted = true;
             }
             return true;
@@ -58,14 +62,16 @@ public class NodeManager : MonoBehaviour
         if (flag && !nodes[u].extracted)
         {
             newSequences.Add(nodes[u].Output);
+            Debug.Log("Hmmmmmmmm,m");
+            Debug.Log(u);
             nodes[u].extracted = true;
         }
         return flag;
     }
 
-    public void FeedInput(int u)
+    public void FeedInput(int u) 
     {
-        nodes[u].extracted = false;
+        nodes[u].extracted = false; 
         if (nodes[u].inputCapacity != nodes[u].inputCount)
         {
             return;
@@ -85,6 +91,7 @@ public class NodeManager : MonoBehaviour
     public void UpdateBeat()
     {
         List<Sequence> newSequences = new List<Sequence>();
+        Debug.Log("//////////////////////////////////////////////");
         foreach (Node node in nodes)
         {
             if (node == null)
