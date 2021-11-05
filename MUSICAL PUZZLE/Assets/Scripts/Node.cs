@@ -5,14 +5,15 @@ using UnityEngine;
 public class Node : MonoBehaviour
 {
 
-    public List<int> inputNodes;
+    public int[] inputNodes;
     public int inputCapacity;
+    public int inputCount;
     public List<int> outputNodes;
     public int index;
 
     public bool extracted;
 
-    public List<Sequence> input;
+    public Sequence[] input;
     private Sequence output;
     private NodeManager nodeManager;
 
@@ -28,8 +29,10 @@ public class Node : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
+        inputNodes = new int[100];
+        input = new Sequence[100];
         nodeManager = GameObject.Find("Nodes").GetComponent<NodeManager>();
     }
 

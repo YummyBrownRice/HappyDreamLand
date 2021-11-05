@@ -20,8 +20,8 @@ public class NodeManager : MonoBehaviour
     {
         UpdatePuzzle();
         AddNode(nodeKinds[1], new Vector2(-1, -2));
-        AddConnection(0, 2);
-        AddConnection(1, 2);
+        AddConnection(0, 2, 0);
+        AddConnection(1, 2, 1);
     }
 
     public void UpdatePuzzle()
@@ -40,7 +40,7 @@ public class NodeManager : MonoBehaviour
 
     public bool ExtractOutput(int u, ref List<Sequence> newSequences)
     {
-        if (nodes[u].outputNodes.Count == 0 && nodes[u].inputCapacity == nodes[u].input.Count)
+        if (nodes[u].outputNodes.Count == 0 && nodes[u].inputCapacity == nodes[u].inputCount)
         {
             if (!nodes[u].extracted)
             {
@@ -49,7 +49,7 @@ public class NodeManager : MonoBehaviour
             }
             return true;
         }
-        bool flag = nodes[u].inputCapacity == nodes[u].input.Count;
+        bool flag = nodes[u].inputCapacity == nodes[u].inputCount;
         //Debug.Log(nodes[u].outputNodes[0]);
         for (int i = 0; i < nodes[u].outputNodes.Count; i++)
         {
@@ -66,14 +66,18 @@ public class NodeManager : MonoBehaviour
     public void FeedInput(int u)
     {
         nodes[u].extracted = false;
-        if (nodes[u].inputCapacity != nodes[u].input.Count)
+        if (nodes[u].inputCapacity != nodes[u].inputCount)
         {
             return;
         }
         nodes[u].Process();
         for (int i = 0; i < nodes[u].outputNodes.Count; i++)
         {
-            nodes[nodes[u].outputNodes[i]].input.Add(nodes[u].Output);
+            //nodes[nodes[u].outputNodes[i]].input.Add(nodes[u].Output);
+            int inputIndex = Array.IndexOf(nodes[nodes[u].outputNodes[i]].inputNodes, u);
+            
+            nodes[nodes[u].outputNodes[i]].input[inputIndex] = nodes[u].Output;
+            nodes[nodes[u].outputNodes[i]].inputCount += 1;
             FeedInput(nodes[u].outputNodes[i]);
         }
     }
@@ -87,7 +91,8 @@ public class NodeManager : MonoBehaviour
             {
                 continue;
             }
-            node.input.Clear();
+            node.input = new Sequence[100];
+            node.inputCount = 0;
         }
 
         for (int i = 0; i < soundSourceCount; i++)
@@ -121,14 +126,14 @@ public class NodeManager : MonoBehaviour
         nodes[index_] = nodeComp;
     }
 
-    public void AddConnection(int i1, int i2)
+    public void AddConnection(int i1, int i2, int inputIndex)
     {
-        if (i1 == i2)
+        if (i1 == i2 || inputIndex >= nodes[i2].inputCapacity || nodes[i2].input[inputIndex] != null)
         {
             return;
         }
         nodes[i1].outputNodes.Add(i2);
-        nodes[i2].inputNodes.Add(i1);
+        nodes[i2].inputNodes[inputIndex] = i1;
         UpdateBeat();
     }
 
