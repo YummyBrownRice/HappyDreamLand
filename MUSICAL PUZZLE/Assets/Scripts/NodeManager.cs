@@ -8,6 +8,8 @@ public class NodeManager : MonoBehaviour
     #region Basic Node Logic
     public Node[] nodes;
     public List<GameObject> nodeKinds;
+    public int soundSourceCount;
+
     private BeatManager beatManager;
     private void Awake()
     {
@@ -17,7 +19,7 @@ public class NodeManager : MonoBehaviour
     void Start()
     {
         UpdatePuzzle();
-        AddNode(nodeKinds[1], new Vector2(1, 2));
+        AddNode(nodeKinds[1], new Vector2(-1, -2));
         AddConnection(0, 2);
         AddConnection(1, 2);
     }
@@ -87,10 +89,17 @@ public class NodeManager : MonoBehaviour
             }
             node.input.Clear();
         }
-        FeedInput(0);
-        FeedInput(1);
-        ExtractOutput(0, ref newSequences);
-        ExtractOutput(1, ref newSequences);
+
+        for (int i = 0; i < soundSourceCount; i++)
+        {
+            FeedInput(i);
+        }
+
+        for (int i = 0; i < soundSourceCount; i++)
+        {
+            ExtractOutput(i, ref newSequences);
+        }
+
 
 
         //Find terminal nodes for playing sounds

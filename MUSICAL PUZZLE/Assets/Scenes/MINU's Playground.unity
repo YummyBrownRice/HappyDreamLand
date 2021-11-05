@@ -272,6 +272,7 @@ MonoBehaviour:
   nodeKinds:
   - {fileID: 9122176493716190873, guid: 88d5db51a3e50704b9a2fb9c91b3a471, type: 3}
   - {fileID: 9122176493716190873, guid: 73b3686797ea32e499b45d211cfdf15f, type: 3}
+  soundSourceCount: 2
 --- !u!1001 &846986471
 PrefabInstance:
   m_ObjectHideFlags: 0
