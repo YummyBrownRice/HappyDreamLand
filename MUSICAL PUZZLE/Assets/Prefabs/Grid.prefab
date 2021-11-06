@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5435300468596379962}
   - component: {fileID: 7466608602393938327}
+  - component: {fileID: -4605450761216785732}
   m_Layer: 0
-  m_Name: Empty Grid
+  m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,3 +83,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-4605450761216785732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8332588358689506073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8993b9b845af81a4ea17ce514b197504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GridSprite: {fileID: 0}
+  GridSprites:
+  - {fileID: 21300000, guid: 7d6601b947c7120448c89877e433a21e, type: 3}
+  - {fileID: 21300000, guid: a07dc3e92bc5bf841b29e3fd79d27fe4, type: 3}
+  - {fileID: 21300000, guid: 27cf74008e725bc4f9f0910c8332e548, type: 3}
+  nonSprite: {fileID: 21300000, guid: 1469f2136b3e119469ed6b6aef62d655, type: 3}
+  nodeManager: {fileID: 0}
+  connectedNode: {fileID: 0}

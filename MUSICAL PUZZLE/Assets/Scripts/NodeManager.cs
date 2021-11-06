@@ -11,20 +11,31 @@ public class NodeManager : MonoBehaviour
     public int soundSourceCount;
 
     private BeatManager beatManager;
+    private GridManager gridManager;
+
+    public enum nodeType
+    {
+        SoundSource,
+        Link,
+        Inverse
+    }
+
     private void Awake()
     {
         beatManager = GameObject.Find("SoundManager").GetComponent<BeatManager>();
+        gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
     }
 
     void Start()
     {
         UpdatePuzzle();
-        AddNode(nodeKinds[2], new Vector2(-1, -2));
-        AddNode(nodeKinds[1], new Vector2(3, 3));
-        AddNode(nodeKinds[2], new Vector2(0, 0));
-        AddNode(nodeKinds[1], new Vector2(1, 1));
-        AddNode(nodeKinds[1], new Vector2(2, 2));
-        AddNode(nodeKinds[2], new Vector2(3, 3));
+        AddNode(nodeKinds[(int)nodeType.Inverse], new Vector3(0, 0 ,0), nodeType.Inverse);
+        AddNode(nodeKinds[1], new Vector3(1, -2, 1), nodeType.Link);
+        /*
+        AddNode(nodeKinds[2], new Vector2(0, 0), nodeType.Inverse);
+        AddNode(nodeKinds[1], new Vector2(1, 1), nodeType.Link);
+        AddNode(nodeKinds[1], new Vector2(2, 2), nodeType.Link);
+        AddNode(nodeKinds[2], new Vector2(3, 3), nodeType.Inverse);
         AddConnection(0, 2, 0);
         AddConnection(2, 3, 0);
         AddConnection(1, 3, 1);
@@ -38,6 +49,7 @@ public class NodeManager : MonoBehaviour
         RemoveConnection(0, 3);
         RemoveNode(6);
         RemoveNode(3);
+        */
     }
 
     public void UpdatePuzzle()
@@ -129,15 +141,18 @@ public class NodeManager : MonoBehaviour
 
     #region Node manipulation
 
-    public void AddNode(GameObject obj, Vector3 pos)
+    public void AddNode(GameObject obj, Vector3 coordinate, nodeType nodeType)
     {
-        GameObject go = Instantiate(obj, pos, Quaternion.identity, transform);
+        GameObject go = Instantiate(obj, new Vector3(0,0,0), Quaternion.identity, transform);
 
         int index_ = Array.IndexOf(nodes, null);
 
         Node nodeComp = go.GetComponent<Node>();
         nodeComp.index = index_;
+        nodeComp.nodeType = nodeType;
         nodes[index_] = nodeComp;
+        Debug.Log(gridManager.indexToCoordinate.FindIndex(d => d == coordinate));
+        gridManager.indexToGridcell[gridManager.indexToCoordinate.IndexOf(coordinate)].ConnectToNode(index_);
     }
 
     public void AddConnection(int i1, int i2, int inputIndex)

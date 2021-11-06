@@ -14,6 +14,11 @@ public class Node : MonoBehaviour
     public bool extracted;
 
     public Sequence[] input;
+
+    public GridCell connectedCell;
+
+    public NodeManager.nodeType nodeType;
+
     private Sequence output;
     private NodeManager nodeManager;
 
