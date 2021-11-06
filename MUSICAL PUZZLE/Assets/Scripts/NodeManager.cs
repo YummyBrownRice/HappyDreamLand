@@ -40,21 +40,17 @@ public class NodeManager : MonoBehaviour
         UpdateBeat();
     }
 
-    public bool ExtractOutput(int u, ref List<Sequence> newSequences) //BeatManager로 보낼 최종 sequence list를 추출
+    public bool ExtractOutput(int u, ref List<Sequence> newSequences) //BeatManager�? 보낼 최종 sequence list�? 추출
     {
-        if (nodes[u].outputNodes.Count == 0 && nodes[u].inputCapacity == nodes[u].inputCount)
+        if (nodes[u].inputCapacity != nodes[u].inputCount)
         {
-            if (!nodes[u].extracted)
-            {
-                newSequences.Add(nodes[u].Output);
-                Debug.Log("Hm,m");
-                Debug.Log(u);
-                nodes[u].extracted = true;
-            }
+            return false;
+        }
+        if (nodes[u].extracted)
+        {
             return true;
         }
-        bool flag = nodes[u].inputCapacity == nodes[u].inputCount;
-        //Debug.Log(nodes[u].outputNodes[0]);
+        bool flag = true;
         for (int i = 0; i < nodes[u].outputNodes.Count; i++)
         {
             flag = !ExtractOutput(nodes[u].outputNodes[i], ref newSequences) && flag;
@@ -62,16 +58,14 @@ public class NodeManager : MonoBehaviour
         if (flag && !nodes[u].extracted)
         {
             newSequences.Add(nodes[u].Output);
-            Debug.Log("Hmmmmmmmm,m");
-            Debug.Log(u);
             nodes[u].extracted = true;
         }
-        return flag;
+        return true;
     }
 
-    public void FeedInput(int u) 
+    public void FeedInput(int u)
     {
-        nodes[u].extracted = false; 
+        nodes[u].extracted = false;
         if (nodes[u].inputCapacity != nodes[u].inputCount)
         {
             return;
@@ -81,7 +75,7 @@ public class NodeManager : MonoBehaviour
         {
             //nodes[nodes[u].outputNodes[i]].input.Add(nodes[u].Output);
             int inputIndex = Array.IndexOf(nodes[nodes[u].outputNodes[i]].inputNodes, u);
-            
+
             nodes[nodes[u].outputNodes[i]].input[inputIndex] = nodes[u].Output;
             nodes[nodes[u].outputNodes[i]].inputCount += 1;
             FeedInput(nodes[u].outputNodes[i]);
@@ -91,7 +85,6 @@ public class NodeManager : MonoBehaviour
     public void UpdateBeat()
     {
         List<Sequence> newSequences = new List<Sequence>();
-        Debug.Log("//////////////////////////////////////////////");
         foreach (Node node in nodes)
         {
             if (node == null)
