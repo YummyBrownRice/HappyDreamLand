@@ -19,11 +19,25 @@ public class NodeManager : MonoBehaviour
     void Start()
     {
         UpdatePuzzle();
-        AddNode(nodeKinds[1], new Vector2(-1, -2));
+        AddNode(nodeKinds[2], new Vector2(-1, -2));
+        AddNode(nodeKinds[1], new Vector2(3, 3));
+        AddNode(nodeKinds[2], new Vector2(0, 0));
+        AddNode(nodeKinds[1], new Vector2(1, 1));
+        AddNode(nodeKinds[1], new Vector2(2, 2));
         AddNode(nodeKinds[2], new Vector2(3, 3));
-        AddConnection(0, 3, 0);
-        AddConnection(3, 2, 0);
-        AddConnection(1, 2, 1);
+        AddConnection(0, 2, 0);
+        AddConnection(2, 3, 0);
+        AddConnection(1, 3, 1);
+        AddConnection(2, 4, 0);
+        AddConnection(0, 5, 0);
+        AddConnection(4, 5, 1);
+        AddConnection(3, 6, 0);
+        AddConnection(5, 6, 1);
+        AddConnection(6, 7, 0);
+        RemoveConnection(4, 5);
+        RemoveConnection(0, 3);
+        RemoveNode(6);
+        RemoveNode(3);
     }
 
     public void UpdatePuzzle()
@@ -135,6 +149,51 @@ public class NodeManager : MonoBehaviour
         nodes[i1].outputNodes.Add(i2);
         nodes[i2].inputNodes[inputIndex] = i1;
         UpdateBeat();
+    }
+
+    public void RemoveConnection(int i1, int i2)
+    {
+        if (i1 == i2 || nodes[i1] == null || nodes[i2] == null)
+        {
+            Debug.LogError("What node is this?");
+            UpdateBeat();
+            return;
+        }
+        for (int i = 0; i < nodes[i2].inputCapacity; i++)
+        {
+            if (nodes[i2].inputNodes[i] == i1)
+            {
+                Debug.Log("hello?");
+                nodes[i2].inputNodes[i] = -1;
+                nodes[i1].outputNodes.Remove(i2);
+                UpdateBeat();
+                return;
+            }
+        }
+        Debug.LogError("You tried to remove a nonexistent connection");
+    }
+
+    public void RemoveNode(int index)
+    {
+        if (nodes[index] == null)
+        {
+            Debug.LogError("You tried to remove a nonexistent node");
+            return;
+        }
+        for (int i = 0; i < nodes[index].inputCapacity; i++)
+        {
+            if (nodes[index].inputNodes[i] != -1)
+            {
+                RemoveConnection(nodes[index].inputNodes[i], index);
+            }
+        }
+        for (int i = 0; i < nodes[index].outputNodes.Count; i++)
+        {
+            if (nodes[index].outputNodes[i] != -1)
+            {
+                RemoveConnection(index, nodes[index].outputNodes[i]);
+            }
+        }
     }
 
     #endregion
