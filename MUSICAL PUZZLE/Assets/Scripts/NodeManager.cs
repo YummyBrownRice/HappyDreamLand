@@ -6,12 +6,15 @@ using System;
 public class NodeManager : MonoBehaviour
 {
     #region Basic Node Logic
+
+    
     public Node[] nodes;
     public List<GameObject> nodeKinds;
     public int soundSourceCount;
 
     private BeatManager beatManager;
     private GridManager gridManager;
+    private LevelManager levelManager;
 
     public enum nodeType
     {
@@ -24,6 +27,7 @@ public class NodeManager : MonoBehaviour
     {
         beatManager = GameObject.Find("SoundManager").GetComponent<BeatManager>();
         gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
+        levelManager = transform.GetComponent<LevelManager>();
     }
 
     void Start()
@@ -52,6 +56,8 @@ public class NodeManager : MonoBehaviour
 
     public void UpdatePuzzle()
     {
+        LevelManager.Level level = levelManager.Load();
+        /*
         int index_ = 0;
         foreach (Transform node in transform)
         {
@@ -59,6 +65,14 @@ public class NodeManager : MonoBehaviour
             nodes[index_] = n;
             n.index = index_;
             index_++;
+        }
+        */
+
+        //TODO: Instantiate Nodes & Connect w/ grid
+
+        foreach (var cell in level.map)
+        {
+            AddNode(nodeKinds[(int)cell.type], cell.coordinate, cell.type);
         }
 
         UpdateBeat();

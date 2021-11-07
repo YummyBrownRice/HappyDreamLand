@@ -1,6 +1,8 @@
 using UnityEngine.Audio;
 using UnityEngine;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Sequence
@@ -11,6 +13,19 @@ public class Sequence
     {
         sequence = sequence_;
     }
+
+    public Sequence(int[] sequenceArray)
+    {
+        List<Beat> sequence_ = new List<Beat>();
+
+        foreach (var beat in sequenceArray)
+        {
+            sequence_.Add((Beat)beat);
+        }
+
+        sequence = sequence_.ToArray();
+    }
+
     [Flags] public enum Beat
     {
         None = 0,

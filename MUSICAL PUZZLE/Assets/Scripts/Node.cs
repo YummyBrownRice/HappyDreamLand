@@ -19,6 +19,8 @@ public class Node : MonoBehaviour
 
     public NodeManager.nodeType nodeType;
 
+    public Dictionary<string, object> args = new Dictionary<string, object>();
+
     private Sequence output;
     private NodeManager nodeManager;
 
@@ -39,6 +41,11 @@ public class Node : MonoBehaviour
         inputNodes = new int[100];
         input = new Sequence[100];
         nodeManager = GameObject.Find("Nodes").GetComponent<NodeManager>();
+    }
+
+    public virtual void ProcessArguments(Dictionary<string, object> args)
+    {
+        
     }
 
     public virtual void Process()

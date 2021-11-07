@@ -1,0 +1,15 @@
+{
+	"endGoal": [1, 3, 0, 1, 2],
+	"map":[
+		{
+			"coordinate":[0, -7, 7],
+			"type":0,
+			"sourceSound":[3, 0, 1, 2]
+		},
+		{
+			"coordinate":[0, -5, 5],
+			"type":0,
+			"sourceSound":[3, 0, 0]
+		}
+	]
+}
