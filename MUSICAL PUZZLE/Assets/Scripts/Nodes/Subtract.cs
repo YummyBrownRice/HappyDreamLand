@@ -5,11 +5,21 @@ using System;
 using System.Linq;
 public class Subtract : Node // Todo
 {
+    static int GCD(int a, int b)
+    {
+        int Remainder;
+    
+        while( b != 0 )
+        {
+            Remainder = a % b;
+            a = b;
+            b = Remainder;
+        }
+      
+        return a;
+    }
     public override void Process()
     {
-        leninput_1 = input[0].sequence.length;
-        leninput_2 = input[1].sequence.length;
-        
-        Output = new Sequence(input[0].sequence.ToArray());
+            
     }
 }
