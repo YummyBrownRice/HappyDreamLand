@@ -15,7 +15,7 @@ public class GridCell : MonoBehaviour
 
     public Node connectedNode;
 
-    public void Start()
+    public void Awake()
     {
         nodeManager = GameObject.Find("Nodes").GetComponent<NodeManager>();
     }

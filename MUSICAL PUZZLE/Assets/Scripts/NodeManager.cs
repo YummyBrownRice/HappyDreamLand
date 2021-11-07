@@ -29,13 +29,12 @@ public class NodeManager : MonoBehaviour
     void Start()
     {
         UpdatePuzzle();
-        AddNode(nodeKinds[(int)nodeType.Inverse], new Vector3(0, 0 ,0), nodeType.Inverse);
+        AddNode(nodeKinds[(int)nodeType.Inverse], new Vector3(0, 0, 0), nodeType.Inverse);
         AddNode(nodeKinds[1], new Vector3(1, -2, 1), nodeType.Link);
-        /*
-        AddNode(nodeKinds[2], new Vector2(0, 0), nodeType.Inverse);
-        AddNode(nodeKinds[1], new Vector2(1, 1), nodeType.Link);
-        AddNode(nodeKinds[1], new Vector2(2, 2), nodeType.Link);
-        AddNode(nodeKinds[2], new Vector2(3, 3), nodeType.Inverse);
+        AddNode(nodeKinds[2], new Vector3(0, -1, 1), nodeType.Inverse);
+        AddNode(nodeKinds[1], new Vector3(0, -4, 4), nodeType.Link);
+        AddNode(nodeKinds[1], new Vector3(1, -1, 0), nodeType.Link);
+        AddNode(nodeKinds[2], new Vector3(1, -3, 2), nodeType.Inverse);
         AddConnection(0, 2, 0);
         AddConnection(2, 3, 0);
         AddConnection(1, 3, 1);
@@ -46,10 +45,9 @@ public class NodeManager : MonoBehaviour
         AddConnection(5, 6, 1);
         AddConnection(6, 7, 0);
         RemoveConnection(4, 5);
-        RemoveConnection(0, 3);
+        RemoveConnection(0, 3); //Nonexistent connection -> error
         RemoveNode(6);
         RemoveNode(3);
-        */
     }
 
     public void UpdatePuzzle()
@@ -66,7 +64,7 @@ public class NodeManager : MonoBehaviour
         UpdateBeat();
     }
 
-    public bool ExtractOutput(int u, ref List<Sequence> newSequences) //BeatManager�? 보낼 최종 sequence list�? 추출
+    public bool ExtractOutput(int u, ref List<Sequence> newSequences)
     {
         if (nodes[u].inputCapacity != nodes[u].inputCount)
         {
@@ -143,7 +141,7 @@ public class NodeManager : MonoBehaviour
 
     public void AddNode(GameObject obj, Vector3 coordinate, nodeType nodeType)
     {
-        GameObject go = Instantiate(obj, new Vector3(0,0,0), Quaternion.identity, transform);
+        GameObject go = Instantiate(obj, new Vector3(0, 0, 0), Quaternion.identity, transform);
 
         int index_ = Array.IndexOf(nodes, null);
 
@@ -151,8 +149,7 @@ public class NodeManager : MonoBehaviour
         nodeComp.index = index_;
         nodeComp.nodeType = nodeType;
         nodes[index_] = nodeComp;
-        Debug.Log(gridManager.indexToCoordinate.FindIndex(d => d == coordinate));
-        gridManager.indexToGridcell[gridManager.indexToCoordinate.IndexOf(coordinate)].ConnectToNode(index_);
+        gridManager.indexToGridcell[gridManager.indexToCoordinate.FindIndex(d => d == coordinate)].ConnectToNode(index_);
     }
 
     public void AddConnection(int i1, int i2, int inputIndex)
@@ -178,7 +175,6 @@ public class NodeManager : MonoBehaviour
         {
             if (nodes[i2].inputNodes[i] == i1)
             {
-                Debug.Log("hello?");
                 nodes[i2].inputNodes[i] = -1;
                 nodes[i1].outputNodes.Remove(i2);
                 UpdateBeat();
