@@ -24,7 +24,9 @@ public class NodeManager : MonoBehaviour
         Add,
         Subtract,
         PadRight,
-        PadLeft
+        PadLeft,
+        DelayRight,
+        DelayLeft
     }
 
     private void Awake()
