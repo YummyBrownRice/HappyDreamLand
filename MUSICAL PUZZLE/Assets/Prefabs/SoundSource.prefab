@@ -52,5 +52,8 @@ MonoBehaviour:
   input: []
   connectedCell: {fileID: 0}
   nodeType: 0
+  rotation: 0
+  inputDirections: 
+  outputDirections: 000000000100000002000000030000000400000005000000
   sourceSound:
     sequence: 

@@ -168,6 +168,26 @@ public class NodeManager : MonoBehaviour
         nodeComp.nodeType = nodeType;
         nodes[index_] = nodeComp;
         nodeComp.rotation = rotation;
+        int[] inputDirections = nodeComp.inputDirections;
+        int[] outputDirections = nodeComp.outputDirections;
+
+        if (inputDirections.Length > 0)
+        {
+            for (int i = 0; i < inputDirections.Length; i++)
+            {
+                int num = (inputDirections[i] + rotation) % 6;
+                inputDirections[i] = num;
+            }
+        }
+        if (outputDirections.Length > 0)
+        {
+            for (int i = 0; i < outputDirections.Length; i++)
+            {
+                int num = (outputDirections[i] + rotation) % 6;
+                outputDirections[i] = num;
+            }
+        }
+        
         gridManager.indexToGridcell[gridManager.indexToCoordinate.FindIndex(d => d == coordinate)].ConnectToNode(index_);
         return nodeComp;
     }
