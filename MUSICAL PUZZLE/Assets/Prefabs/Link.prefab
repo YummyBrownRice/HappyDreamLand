@@ -52,3 +52,6 @@ MonoBehaviour:
   input: []
   connectedCell: {fileID: 0}
   nodeType: 0
+  rotation: 0
+  inputDirections: 0200000004000000
+  outputDirections: 00000000
