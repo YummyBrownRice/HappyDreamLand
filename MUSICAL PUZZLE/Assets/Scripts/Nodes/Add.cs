@@ -24,8 +24,8 @@ public class Add : Node // Todo
     private int lcm_len;
     private int coeff_1;
     private int coeff_2;
-    private sequence res_1;
-    private sequence res_2;
+    private Sequence.Beat[] res_1;
+    private Sequence.Beat[] res_2;
     public override void Process()
     {
         len_input1 = input[0].sequence.Count();
@@ -34,20 +34,23 @@ public class Add : Node // Todo
         lcm_len = len_input1*len_input2/gcd_len;
         coeff_1 = lcm_len/len_input1;
         coeff_2 = lcm_len/len_input2;
-        res_1 = new Sequence(input[0].sequence.ToArray());
-        res_2 = new Sequence(input[1].sequence.ToArray());
+        res_1 = (Sequence.Beat[]) input[0].sequence.Clone();
+        res_2 = (Sequence.Beat[]) input[1].sequence.Clone();
 
-        while(coeff_1 > 0){
-            res_1 = Sequence(res_1.Concat(input[0]).ToArray());
-            coeff_1 -= 1;
+        for (int i=0; i < coeff_1-1; i++)
+        {
+            res_1 = res_1.Concat(input[0].sequence).ToArray();
         }
-        while(coeff_2 > 0){
-            res_2 = Sequence(res_2.Concat(input[1]).ToArray());
-            coeff_2 -= 1;
+        for (int i=0; i < coeff_2-1; i++)
+        {
+            res_2 = res_2.Concat(input[1].sequence).ToArray();
         }
-        Output = new Sequence(res1.ToArray());
+
+        Sequence.Beat[] OutputArray = (Sequence.Beat[]) res_1.Clone(); 
         for(int i=0;i<lcm_len;i++){
-            Output[i] = Output[i] || res_2[i];
+            OutputArray[i] |= res_2[i];
         }
+
+        Output = new Sequence(OutputArray);
     }
 }
