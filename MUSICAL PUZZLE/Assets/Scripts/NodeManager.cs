@@ -20,7 +20,9 @@ public class NodeManager : MonoBehaviour
     {
         SoundSource,
         Link,
-        Inverse
+        Inverse,
+        Add,
+        Subtract
     }
 
     private void Awake()
@@ -33,6 +35,7 @@ public class NodeManager : MonoBehaviour
     void Start()
     {
         UpdatePuzzle();
+        /*
         AddNode(nodeKinds[(int)nodeType.Inverse], new Vector3(0, 0, 0), nodeType.Inverse);
         AddNode(nodeKinds[1], new Vector3(1, -2, 1), nodeType.Link);
         AddNode(nodeKinds[2], new Vector3(0, -1, 1), nodeType.Inverse);
@@ -52,6 +55,10 @@ public class NodeManager : MonoBehaviour
         RemoveConnection(0, 3); //Nonexistent connection -> error
         RemoveNode(6);
         RemoveNode(3);
+        */
+        AddNode(nodeKinds[(int)nodeType.Subtract], new Vector3(2, -3, 1), nodeType.Subtract, 3);
+        AddConnection(0, 2, 0);
+        AddConnection(1, 2, 1);
     }
 
     public void UpdatePuzzle()

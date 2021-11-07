@@ -272,6 +272,8 @@ MonoBehaviour:
   - {fileID: 9122176493716190873, guid: 88d5db51a3e50704b9a2fb9c91b3a471, type: 3}
   - {fileID: 9122176493716190873, guid: 73b3686797ea32e499b45d211cfdf15f, type: 3}
   - {fileID: 9122176493716190873, guid: 83a2fa6cb8c19c143b37c76c5cefa9e0, type: 3}
+  - {fileID: 9122176493716190873, guid: 0bd47082352572d43a93e5dfc1930592, type: 3}
+  - {fileID: 9122176493716190873, guid: 6ec9a77cb35404d41a6b055a294766c0, type: 3}
   soundSourceCount: 2
 --- !u!114 &473314683
 MonoBehaviour:

@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9122176493716190872}
-  - component: {fileID: 7003269677347798309}
+  - component: {fileID: 7979120277490346969}
   m_Layer: 0
-  m_Name: Inverse
+  m_Name: Subtract
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7003269677347798309
+--- !u!114 &7979120277490346969
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,18 +40,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 9122176493716190873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e812874b04827443b70be78392e4064, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d10366ca8c7f41488aa482f1ba03493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputNodes: 
-  inputCapacity: 1
+  inputCapacity: 2
   inputCount: 0
   outputNodes: 
   index: 0
   extracted: 0
   input: []
   connectedCell: {fileID: 0}
-  nodeType: 2
+  nodeType: 0
   rotation: 0
-  inputDirections: 00000000
+  inputDirections: 0100000005000000
   outputDirections: 03000000

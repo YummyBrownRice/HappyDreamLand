@@ -51,7 +51,7 @@ MonoBehaviour:
   extracted: 0
   input: []
   connectedCell: {fileID: 0}
-  nodeType: 0
+  nodeType: 1
   rotation: 0
   inputDirections: 0200000004000000
   outputDirections: 00000000
