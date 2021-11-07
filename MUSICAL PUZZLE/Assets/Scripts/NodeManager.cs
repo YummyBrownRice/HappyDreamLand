@@ -22,7 +22,9 @@ public class NodeManager : MonoBehaviour
         Link,
         Inverse,
         Add,
-        Subtract
+        Subtract,
+        PadRight,
+        PadLeft
     }
 
     private void Awake()
@@ -57,8 +59,10 @@ public class NodeManager : MonoBehaviour
         RemoveNode(3);
         */
         AddNode(nodeKinds[(int)nodeType.Subtract], new Vector3(2, -3, 1), nodeType.Subtract, 3);
+        AddNode(nodeKinds[(int)nodeType.PadRight], new Vector3(2, -3, 1), nodeType.PadRight, 2);
         AddConnection(0, 2, 0);
-        AddConnection(1, 2, 1);
+        AddConnection(1, 3, 0);
+        AddConnection(3, 2, 1);
     }
 
     public void UpdatePuzzle()
