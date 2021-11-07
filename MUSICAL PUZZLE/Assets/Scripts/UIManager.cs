@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public float margin;
 
     public GameObject tileOBJ;
+    public GridCell gridCell;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,7 @@ public class UIManager : MonoBehaviour
             GameObject go = Instantiate(tileOBJ, new Vector2(0, 0), Quaternion.identity, content);
             go.transform.localPosition = Pos;
             Pos = Pos - new Vector2(0, spacing);
+            go.GetComponent<Image>().sprite = gridCell.GridSprites[(int)limit.type];
             //go.transform.name = Pos.y;
         }
     }

@@ -777,9 +777,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   content: {fileID: 1918228305}
-  spacing: 200
+  spacing: 150
   margin: 100
   tileOBJ: {fileID: 701254503116115151, guid: d1d8165f092f8ae44b9a1ff2cb9e0d87, type: 3}
+  gridCell: {fileID: -4605450761216785732, guid: 60a9ccfe878f64146bb913c2005bb9c6, type: 3}
 --- !u!1 &1918228304
 GameObject:
   m_ObjectHideFlags: 0
