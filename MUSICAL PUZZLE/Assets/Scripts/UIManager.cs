@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class UIManager : MonoBehaviour
             go.transform.localPosition = Pos;
             Pos = Pos - new Vector2(0, spacing);
             go.GetComponent<Image>().sprite = gridCell.GridSprites[(int)limit.type];
+            go.transform.GetChild(0).GetComponent<TMP_Text>().text = limit.count.ToString();
             //go.transform.name = Pos.y;
         }
     }
