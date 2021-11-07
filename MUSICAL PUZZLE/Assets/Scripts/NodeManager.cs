@@ -26,7 +26,8 @@ public class NodeManager : MonoBehaviour
         PadRight,
         PadLeft,
         DelayRight,
-        DelayLeft
+        DelayLeft,
+        Split
     }
 
     private void Awake()
@@ -60,8 +61,8 @@ public class NodeManager : MonoBehaviour
         RemoveNode(6);
         RemoveNode(3);
         */
-        AddNode(nodeKinds[(int)nodeType.Subtract], new Vector3(2, -3, 1), nodeType.Subtract, 3);
-        AddNode(nodeKinds[(int)nodeType.PadRight], new Vector3(2, -3, 1), nodeType.PadRight, 2);
+        AddNode(nodeKinds[(int)nodeType.Link], new Vector3(1, -1, 0), nodeType.Link, 3);
+        AddNode(nodeKinds[(int)nodeType.Split], new Vector3(2, -3, 1), nodeType.Split, 2);
         AddConnection(0, 2, 0);
         AddConnection(1, 3, 0);
         AddConnection(3, 2, 1);

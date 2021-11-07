@@ -106,6 +106,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4b9273742b1d3644a912631645873754, type: 3}
   - {fileID: 21300000, guid: 9550e4c3162c8d54fa2b8ed914fbfede, type: 3}
   - {fileID: 21300000, guid: 0d4dd6f1d389bda44884ee6f119d0f24, type: 3}
+  - {fileID: 21300000, guid: 73a5a33bbef8f234f9f9960d9c650744, type: 3}
   nonSprite: {fileID: 21300000, guid: 1469f2136b3e119469ed6b6aef62d655, type: 3}
   index: 0
   coordinate: {x: 0, y: 0, z: 0}
