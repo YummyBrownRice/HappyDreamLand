@@ -27,5 +27,7 @@ public class GridCell : MonoBehaviour
         connectedNode.connectedCell = this;
 
         spriteRenderer.sprite = GridSprites[(int)connectedNode.nodeType];
+
+        transform.Rotate(Vector3.forward * -60 * nodeManager.nodes[index].rotation);
     }
 }

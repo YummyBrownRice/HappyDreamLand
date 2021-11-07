@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
         foreach (var cell in levelLoaded.map)
         {
             Vector3 coord = new Vector3(cell.coordinate[0], cell.coordinate[1], cell.coordinate[2]);
-            level.map.Add(new Cell(coord, (NodeManager.nodeType) cell.type, new Sequence(cell.sourceSound)));
+            level.map.Add(new Cell(coord, (NodeManager.nodeType) cell.type, cell.rotation, new Sequence(cell.sourceSound)));
         }
 
         return level;
@@ -46,6 +46,7 @@ public class LevelManager : MonoBehaviour
     {
         public int[] coordinate;
         public int type;
+        public int rotation;
         public int[] sourceSound;
     }
 
@@ -53,12 +54,14 @@ public class LevelManager : MonoBehaviour
     {
         public Vector3 coordinate;
         public NodeManager.nodeType type;
+        public int rotation;
         public Sequence sourceSound;
 
-        public Cell(Vector3 coord, NodeManager.nodeType type_, Sequence sourceSound_)
+        public Cell(Vector3 coord, NodeManager.nodeType type_, int rotation_, Sequence sourceSound_)
         {
             coordinate = coord;
             type = type_;
+            rotation = rotation_;
             sourceSound = sourceSound_;
         }
     }

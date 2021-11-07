@@ -21,6 +21,11 @@ public class Node : MonoBehaviour
 
     public Dictionary<string, object> args = new Dictionary<string, object>();
 
+    public int rotation;
+
+    public int[] inputDirections;
+    public int[] outputDirections;
+
     private Sequence output;
     private NodeManager nodeManager;
 

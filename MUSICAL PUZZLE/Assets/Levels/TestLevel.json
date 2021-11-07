@@ -3,12 +3,14 @@
 	"map":[
 		{
 			"coordinate":[0, -7, 7],
-			"type":0,
+			"type":2,
+			"rotation":2,
 			"sourceSound":[3, 0, 1, 2]
 		},
 		{
 			"coordinate":[0, -5, 5],
 			"type":0,
+			"rotation":5,
 			"sourceSound":[3, 0, 0]
 		}
 	]

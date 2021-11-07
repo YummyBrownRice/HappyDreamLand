@@ -72,7 +72,11 @@ public class NodeManager : MonoBehaviour
 
         foreach (var cell in level.map)
         {
-            AddNode(nodeKinds[(int)cell.type], cell.coordinate, cell.type);
+            Node nodeComp = AddNode(nodeKinds[(int)cell.type], cell.coordinate, cell.type, cell.rotation);
+            if (cell.type == nodeType.SoundSource)
+            {
+                nodeComp.GetComponent<SoundSource>().sourceSound = cell.sourceSound;
+            }
         }
 
         UpdateBeat();
@@ -153,7 +157,7 @@ public class NodeManager : MonoBehaviour
 
     #region Node manipulation
 
-    public void AddNode(GameObject obj, Vector3 coordinate, nodeType nodeType)
+    public Node AddNode(GameObject obj, Vector3 coordinate, nodeType nodeType, int rotation = 0)
     {
         GameObject go = Instantiate(obj, new Vector3(0, 0, 0), Quaternion.identity, transform);
 
@@ -163,7 +167,9 @@ public class NodeManager : MonoBehaviour
         nodeComp.index = index_;
         nodeComp.nodeType = nodeType;
         nodes[index_] = nodeComp;
+        nodeComp.rotation = rotation;
         gridManager.indexToGridcell[gridManager.indexToCoordinate.FindIndex(d => d == coordinate)].ConnectToNode(index_);
+        return nodeComp;
     }
 
     public void AddConnection(int i1, int i2, int inputIndex)
