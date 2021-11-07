@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridCell : MonoBehaviour
 {
-    public Sprite GridSprite;
+    public SpriteRenderer spriteRenderer;
 
     public List<Sprite> GridSprites;
     public Sprite nonSprite;
@@ -18,6 +18,7 @@ public class GridCell : MonoBehaviour
     public void Awake()
     {
         nodeManager = GameObject.Find("Nodes").GetComponent<NodeManager>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void ConnectToNode(int index)
@@ -25,6 +26,6 @@ public class GridCell : MonoBehaviour
         connectedNode = nodeManager.nodes[index];
         connectedNode.connectedCell = this;
 
-        GridSprite = GridSprites[(int)connectedNode.nodeType];
+        spriteRenderer.sprite = GridSprites[(int)connectedNode.nodeType];
     }
 }
