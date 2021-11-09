@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Node : MonoBehaviour
@@ -43,14 +44,14 @@ public class Node : MonoBehaviour
 
     private void Awake()
     {
-        inputNodes = new int[100];
-        input = new Sequence[100];
+        inputNodes = new int[6];
+        input = new Sequence[6];
         nodeManager = GameObject.Find("Nodes").GetComponent<NodeManager>();
     }
 
     public virtual void ProcessArguments(Dictionary<string, object> args)
     {
-        
+
     }
 
     public virtual void Process()
@@ -58,5 +59,14 @@ public class Node : MonoBehaviour
         Output = new Sequence(new Sequence.Beat[0]);
     }
 
-
+    public int inputDirToIndex(int inputDir)
+    {
+        int[] originalInputDirections = new int[inputDirections.Length];
+        for (int i = 0; i < inputDirections.Length; i++)
+        {
+            originalInputDirections[i] = inputDirections[i] - rotation;
+        }
+        Array.Sort(originalInputDirections);
+        return Array.FindIndex(originalInputDirections, d => d == inputDir);
+    }
 }

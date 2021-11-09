@@ -7,11 +7,10 @@ public class NodeManager : MonoBehaviour
 {
     #region Basic Node Logic
 
-    
-    public Node[] nodes;
-    public List<GameObject> nodeKinds;
-    public int soundSourceCount;
 
+    public Node[] nodes;
+    public bool[] isSource;
+    public List<GameObject> nodeKinds;
     private BeatManager beatManager;
     private GridManager gridManager;
     private LevelManager levelManager;
@@ -35,6 +34,7 @@ public class NodeManager : MonoBehaviour
         beatManager = GameObject.Find("SoundManager").GetComponent<BeatManager>();
         gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
         levelManager = transform.GetComponent<LevelManager>();
+        isSource = new bool[100];
     }
 
     void Start()
@@ -61,6 +61,8 @@ public class NodeManager : MonoBehaviour
         RemoveNode(6);
         RemoveNode(3);
         */
+        isSource[0] = true;
+        isSource[1] = true;
         AddNode(nodeKinds[(int)nodeType.Link], new Vector3(1, -1, 0), nodeType.Link, 3);
         AddNode(nodeKinds[(int)nodeType.Split], new Vector3(2, -3, 1), nodeType.Split, 2);
         AddConnection(0, 2, 0);
@@ -152,17 +154,21 @@ public class NodeManager : MonoBehaviour
             node.inputCount = 0;
         }
 
-        for (int i = 0; i < soundSourceCount; i++)
+        for (int i = 0; i < 100; i++)
         {
-            FeedInput(i);
+            if (isSource[i])
+            {
+                FeedInput(i);
+            }
         }
 
-        for (int i = 0; i < soundSourceCount; i++)
+        for (int i = 0; i < 100; i++)
         {
-            ExtractOutput(i, ref newSequences);
+            if (isSource[i])
+            {
+                ExtractOutput(i, ref newSequences);
+            }
         }
-
-
 
         //Find terminal nodes for playing sounds
 
@@ -183,27 +189,31 @@ public class NodeManager : MonoBehaviour
         nodeComp.nodeType = nodeType;
         nodes[index_] = nodeComp;
         nodeComp.rotation = rotation;
+        if (nodeType == (nodeType)0)
+        {
+            isSource[index_] = true;
+        }
         int[] inputDirections = nodeComp.inputDirections;
         int[] outputDirections = nodeComp.outputDirections;
 
-        if (inputDirections.Length > 0)
+        for (int i = 0; i < inputDirections.Length; i++)
         {
-            for (int i = 0; i < inputDirections.Length; i++)
-            {
-                int num = (inputDirections[i] + rotation) % 6;
-                inputDirections[i] = num;
-            }
+            int num = (inputDirections[i] + rotation) % 6;
+            inputDirections[i] = num;
         }
-        if (outputDirections.Length > 0)
+        for (int i = 0; i < outputDirections.Length; i++)
         {
-            for (int i = 0; i < outputDirections.Length; i++)
-            {
-                int num = (outputDirections[i] + rotation) % 6;
-                outputDirections[i] = num;
-            }
+            int num = (outputDirections[i] + rotation) % 6;
+            outputDirections[i] = num;
         }
-        
+
         gridManager.indexToGridcell[gridManager.indexToCoordinate.FindIndex(d => d == coordinate)].ConnectToNode(index_);
+
+        foreach (var (i, d) in connectedCellsFrom(index_))
+        {
+            AddConnection(index_, i, d);
+        }
+
         return nodeComp;
     }
 
@@ -246,6 +256,7 @@ public class NodeManager : MonoBehaviour
             Debug.LogError("You tried to remove a nonexistent node");
             return;
         }
+        isSource[index] = false;
         for (int i = 0; i < nodes[index].inputCapacity; i++)
         {
             if (nodes[index].inputNodes[i] != -1)
@@ -267,4 +278,22 @@ public class NodeManager : MonoBehaviour
     }
 
     #endregion
+
+    public System.Collections.Generic.IEnumerable<(int, int)> connectedCellsFrom(int index)
+    {
+        Vector3 centerPos = nodes[index].connectedCell.coordinate;
+        //gridManager.indexToGridcell[gridManager.indexToCoordinate.FindIndex(d => d == coordinate)].ConnectToNode(index_);
+        List<Vector3> dList = new List<Vector3> { new Vector3(0, -1, 1), new Vector3(1, -1, 0), new Vector3(1, 0, -1), new Vector3(0, 1, -1), new Vector3(-1, 1, 0), new Vector3(-1, 0, 1) };
+        for (int i = 0; i < 100; i++)
+        {
+            if (nodes[i] != null)
+            {
+                int dir = dList.FindIndex(d => d == (nodes[i].connectedCell.coordinate - centerPos));
+                if (dir != -1 && Array.Exists(nodes[index].outputDirections, d => d == dir) && Array.Exists(nodes[i].inputDirections, d => d == (dir + 3) % 6))
+                {
+                    yield return (i, dir);
+                }
+            }
+        }
+    }
 }
