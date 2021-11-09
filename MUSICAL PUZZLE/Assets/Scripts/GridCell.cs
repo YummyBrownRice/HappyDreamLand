@@ -4,6 +4,7 @@ using UnityEngine;
 public class GridCell : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
+    public GameObject highlight;
 
     public List<Sprite> GridSprites;
     public Sprite nonSprite;
@@ -51,6 +52,7 @@ public class GridCell : MonoBehaviour
     {
         mouseOn = true;
         gridManager.selectedCell = this;
+        highlight.SetActive(true);
 
     }
 
@@ -58,5 +60,6 @@ public class GridCell : MonoBehaviour
     {
         mouseOn = false;
         gridManager.selectedCell = null;
+        highlight.SetActive(false);
     }
 }
