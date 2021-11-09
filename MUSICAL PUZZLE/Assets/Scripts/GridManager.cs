@@ -35,11 +35,11 @@ public class GridManager : MonoBehaviour
             Origin = Origin + new Vector2(a * Mathf.Sqrt(3) / 2, Mathf.Pow(-1, i + 1) * (-a / 2));
             if (i % 2 == 0)
             {
-                InitCoord = InitCoord + new Vector3(1, 0, -1);
+                InitCoord = InitCoord + new Vector3(1, -1, 0);
             }
             else
             {
-                InitCoord = InitCoord + new Vector3(1, -1, 0);
+                InitCoord = InitCoord + new Vector3(1, 0, -1);
             }
         }
     }

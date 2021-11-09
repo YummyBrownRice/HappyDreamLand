@@ -64,9 +64,9 @@ public class Node : MonoBehaviour
         int[] originalInputDirections = new int[inputDirections.Length];
         for (int i = 0; i < inputDirections.Length; i++)
         {
-            originalInputDirections[i] = inputDirections[i] - rotation;
+            originalInputDirections[i] = (inputDirections[i] - rotation + 6) % 6;
         }
         Array.Sort(originalInputDirections);
-        return Array.FindIndex(originalInputDirections, d => d == inputDir);
+        return Array.FindIndex(originalInputDirections, d => d == (inputDir - rotation + 6) % 6);
     }
 }

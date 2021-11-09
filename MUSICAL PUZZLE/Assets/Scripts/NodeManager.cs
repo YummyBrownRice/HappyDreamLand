@@ -194,11 +194,13 @@ public class NodeManager : MonoBehaviour
             int num = (inputDirections[i] + rotation) % 6;
             inputDirections[i] = num;
         }
+        Array.Sort(inputDirections);
         for (int i = 0; i < outputDirections.Length; i++)
         {
             int num = (outputDirections[i] + rotation) % 6;
             outputDirections[i] = num;
         }
+        Array.Sort(outputDirections);
 
         gridManager.indexToGridcell[gridManager.indexToCoordinate.FindIndex(d => d == coordinate)].ConnectToNode(index_);
 
@@ -222,6 +224,7 @@ public class NodeManager : MonoBehaviour
     public void AddConnection(int i1, int i2, int inputIndex)
     {
         Debug.Log(inputIndex);
+        inputIndex = nodes[i2].inputDirToIndex(inputIndex);
         if (i1 == i2 || nodes[i2].input[inputIndex] != null)
         {
             return;
@@ -292,7 +295,6 @@ public class NodeManager : MonoBehaviour
             {
                 Debug.Log(nodes[i].connectedCell.coordinate);
                 int dir = dList.FindIndex(d => d == (nodes[i].connectedCell.coordinate - centerPos));
-                //Debug.Log(dir);
                 if (dir != -1 && Array.Exists(nodes[index].outputDirections, d => d == dir) && Array.Exists(nodes[i].inputDirections, d => d == (dir + 3) % 6))
                 {
                     yield return (i, dir);
@@ -310,6 +312,8 @@ public class NodeManager : MonoBehaviour
             if (nodes[i] != null)
             {
                 int dir = dList.FindIndex(d => d == (centerPos - nodes[i].connectedCell.coordinate));
+                Debug.Log(i);
+                Debug.Log(dir);
                 if (dir != -1 && Array.Exists(nodes[index].inputDirections, d => d == (dir + 3) % 6) && Array.Exists(nodes[i].outputDirections, d => d == dir))
                 {
                     yield return (i, (dir + 3) % 6);
