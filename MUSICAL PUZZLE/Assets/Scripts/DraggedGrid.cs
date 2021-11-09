@@ -37,5 +37,20 @@ public class DraggedGrid : MonoBehaviour
             }
             Destroy(gameObject);
         }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Rotate(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            Rotate(-1);
+        }
+    }
+
+    private void Rotate(int n)
+    {
+        rotation = (rotation + n) % 6;
+        transform.Rotate(Vector3.forward * -60 * n);
     }
 }
