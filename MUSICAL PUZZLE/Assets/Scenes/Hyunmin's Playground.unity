@@ -776,6 +776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e901cf591e40d754db8782b0fe875ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  draggedOBJ: {fileID: 9176653259113632271, guid: bd4839280d0e4a74a9689c9b549446d8, type: 3}
   content: {fileID: 1918228305}
   spacing: 150
   margin: 100

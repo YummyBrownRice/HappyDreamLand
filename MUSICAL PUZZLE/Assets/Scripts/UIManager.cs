@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     private LevelManager levelManager;
     private NodeManager nodeManager;
     public List<LevelManager.Limitation> limits;
+    public GameObject draggedOBJ;
 
     public Transform content;
     public float spacing;
@@ -38,6 +39,8 @@ public class UIManager : MonoBehaviour
             Pos = Pos - new Vector2(0, spacing);
             go.GetComponent<Image>().sprite = gridCell.GridSprites[(int)limit.type];
             go.transform.GetChild(0).GetComponent<TMP_Text>().text = limit.count.ToString();
+            go.GetComponent<NodeUI>().draggedOBJ = draggedOBJ;
+            go.GetComponent<NodeUI>().type = limit.type;
             //go.transform.name = Pos.y;
         }
     }

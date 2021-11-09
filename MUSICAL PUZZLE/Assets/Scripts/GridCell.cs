@@ -11,12 +11,21 @@ public class GridCell : MonoBehaviour
     public Vector3 coordinate;
 
     public NodeManager nodeManager;
+    private GridManager gridManager;
 
     public Node connectedNode;
+
+    public bool mouseOn;
 
     public void Awake()
     {
         nodeManager = GameObject.Find("Nodes").GetComponent<NodeManager>();
+        gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
+    }
+
+    private void Update()
+    {
+
     }
 
     public void ConnectToNode(int index)
@@ -36,5 +45,18 @@ public class GridCell : MonoBehaviour
         spriteRenderer.sprite = null;
 
         transform.rotation = Quaternion.identity;
+    }
+
+    private void OnMouseEnter()
+    {
+        mouseOn = true;
+        gridManager.selectedCell = this;
+
+    }
+
+    private void OnMouseExit()
+    {
+        mouseOn = false;
+        gridManager.selectedCell = null;
     }
 }

@@ -13,6 +13,8 @@ public class GridManager : MonoBehaviour
     public List<Vector3> indexToCoordinate;
     public List<GridCell> indexToGridcell;
 
+    public GridCell selectedCell;
+
     // Start is called before the first frame update
     void Awake()
     {
