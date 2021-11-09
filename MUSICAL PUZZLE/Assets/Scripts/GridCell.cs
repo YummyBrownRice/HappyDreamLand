@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +17,6 @@ public class GridCell : MonoBehaviour
     public void Awake()
     {
         nodeManager = GameObject.Find("Nodes").GetComponent<NodeManager>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void ConnectToNode(int index)
@@ -29,5 +27,14 @@ public class GridCell : MonoBehaviour
         spriteRenderer.sprite = GridSprites[(int)connectedNode.nodeType];
 
         transform.Rotate(Vector3.forward * -60 * nodeManager.nodes[index].rotation);
+    }
+
+    public void EmptyCell()
+    {
+        connectedNode = null;
+
+        spriteRenderer.sprite = null;
+
+        transform.rotation = Quaternion.identity;
     }
 }

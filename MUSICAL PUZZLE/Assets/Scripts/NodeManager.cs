@@ -66,6 +66,7 @@ public class NodeManager : MonoBehaviour
         AddConnection(0, 2, 0);
         AddConnection(1, 3, 0);
         AddConnection(3, 2, 1);
+        RemoveNode(0);
     }
 
     public void UpdatePuzzle()
@@ -259,6 +260,10 @@ public class NodeManager : MonoBehaviour
                 RemoveConnection(index, nodes[index].outputNodes[i]);
             }
         }
+
+        nodes[index].connectedCell.EmptyCell();
+
+        Destroy(nodes[index].gameObject);
     }
 
     #endregion
