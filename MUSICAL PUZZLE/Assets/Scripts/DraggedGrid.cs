@@ -14,7 +14,7 @@ public class DraggedGrid : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(type);
+        //Debug.Log(type);
         gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
         nodeManager = GameObject.Find("Nodes").GetComponent<NodeManager>();
         GetComponent<SpriteRenderer>().sprite = OBJ.GridSprites[(int)type];

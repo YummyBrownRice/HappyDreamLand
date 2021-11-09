@@ -16,9 +16,10 @@ public class NodeUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             if (Input.GetMouseButtonDown(0))
             {
                 //Debug.Log("HIHI");
-                Instantiate(draggedOBJ, transform.position, Quaternion.identity);
-                draggedOBJ.GetComponent<DraggedGrid>().type = type;
-                Debug.Log(type);
+                GameObject OBJ = Instantiate(draggedOBJ, transform.position, Quaternion.identity);
+                OBJ.GetComponent<DraggedGrid>().type = type;
+                //Debug.Log(type);
+                //Debug.Log(draggedOBJ.GetComponent<DraggedGrid>().type);
             }
         }
     }
