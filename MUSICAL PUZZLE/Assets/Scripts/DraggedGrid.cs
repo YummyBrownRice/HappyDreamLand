@@ -7,13 +7,17 @@ public class DraggedGrid : MonoBehaviour
     public NodeManager.nodeType type;
     public int rotation;
 
+    public GridCell OBJ;
+
     private GridManager gridManager;
     private NodeManager nodeManager;
 
     private void Start()
     {
+        Debug.Log(type);
         gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
         nodeManager = GameObject.Find("Nodes").GetComponent<NodeManager>();
+        GetComponent<SpriteRenderer>().sprite = OBJ.GridSprites[(int)type];
     }
 
     private void Update()
@@ -24,8 +28,13 @@ public class DraggedGrid : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             //Debug.Log("HIHI");
-
-            nodeManager.AddNode(nodeManager.nodeKinds[(int)type], gridManager.selectedCell.coordinate, type, rotation);
+            if (gridManager.selectedCell != null)
+            {
+                if (gridManager.selectedCell.connectedNode == null)
+                {
+                    nodeManager.AddNode(nodeManager.nodeKinds[(int)type], gridManager.selectedCell.coordinate, type, rotation);
+                }
+            }
             Destroy(gameObject);
         }
     }
