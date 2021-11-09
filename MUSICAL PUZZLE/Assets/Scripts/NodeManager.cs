@@ -62,13 +62,6 @@ public class NodeManager : MonoBehaviour
         RemoveNode(3);
         */
         isSource[0] = true;
-        isSource[1] = true;
-        AddNode(nodeKinds[(int)nodeType.Link], new Vector3(1, -1, 0), nodeType.Link, 3);
-        AddNode(nodeKinds[(int)nodeType.Split], new Vector3(2, -3, 1), nodeType.Split, 2);
-        AddConnection(0, 2, 0);
-        AddConnection(1, 3, 0);
-        AddConnection(3, 2, 1);
-        RemoveNode(0);
     }
 
     public void UpdatePuzzle()
@@ -209,23 +202,32 @@ public class NodeManager : MonoBehaviour
 
         gridManager.indexToGridcell[gridManager.indexToCoordinate.FindIndex(d => d == coordinate)].ConnectToNode(index_);
 
+        foreach (var (i, d) in connectedCellsTo(index_))
+        {
+            Debug.Log("to");
+            AddConnection(i, index_, d);
+        }
+
         foreach (var (i, d) in connectedCellsFrom(index_))
         {
+            Debug.Log("from");
             AddConnection(index_, i, d);
         }
+
+        UpdateBeat();
 
         return nodeComp;
     }
 
     public void AddConnection(int i1, int i2, int inputIndex)
     {
-        if (i1 == i2 || inputIndex >= nodes[i2].inputCapacity || nodes[i2].input[inputIndex] != null)
+        Debug.Log(inputIndex);
+        if (i1 == i2 || nodes[i2].input[inputIndex] != null)
         {
             return;
         }
         nodes[i1].outputNodes.Add(i2);
         nodes[i2].inputNodes[inputIndex] = i1;
-        UpdateBeat();
     }
 
     public void RemoveConnection(int i1, int i2)
@@ -233,7 +235,6 @@ public class NodeManager : MonoBehaviour
         if (i1 == i2 || nodes[i1] == null || nodes[i2] == null)
         {
             Debug.LogError("What node is this?");
-            UpdateBeat();
             return;
         }
         for (int i = 0; i < nodes[i2].inputCapacity; i++)
@@ -242,7 +243,6 @@ public class NodeManager : MonoBehaviour
             {
                 nodes[i2].inputNodes[i] = -1;
                 nodes[i1].outputNodes.Remove(i2);
-                UpdateBeat();
                 return;
             }
         }
@@ -272,6 +272,8 @@ public class NodeManager : MonoBehaviour
             }
         }
 
+        UpdateBeat();
+
         nodes[index].connectedCell.EmptyCell();
 
         Destroy(nodes[index].gameObject);
@@ -288,10 +290,29 @@ public class NodeManager : MonoBehaviour
         {
             if (nodes[i] != null)
             {
+                Debug.Log(nodes[i].connectedCell.coordinate);
                 int dir = dList.FindIndex(d => d == (nodes[i].connectedCell.coordinate - centerPos));
+                //Debug.Log(dir);
                 if (dir != -1 && Array.Exists(nodes[index].outputDirections, d => d == dir) && Array.Exists(nodes[i].inputDirections, d => d == (dir + 3) % 6))
                 {
                     yield return (i, dir);
+                }
+            }
+        }
+    }
+
+    public System.Collections.Generic.IEnumerable<(int, int)> connectedCellsTo(int index)
+    {
+        Vector3 centerPos = nodes[index].connectedCell.coordinate;
+        List<Vector3> dList = new List<Vector3> { new Vector3(0, -1, 1), new Vector3(1, -1, 0), new Vector3(1, 0, -1), new Vector3(0, 1, -1), new Vector3(-1, 1, 0), new Vector3(-1, 0, 1) };
+        for (int i = 0; i < 100; i++)
+        {
+            if (nodes[i] != null)
+            {
+                int dir = dList.FindIndex(d => d == (centerPos - nodes[i].connectedCell.coordinate));
+                if (dir != -1 && Array.Exists(nodes[index].inputDirections, d => d == (dir + 3) % 6) && Array.Exists(nodes[i].outputDirections, d => d == dir))
+                {
+                    yield return (i, (dir + 3) % 6);
                 }
             }
         }
