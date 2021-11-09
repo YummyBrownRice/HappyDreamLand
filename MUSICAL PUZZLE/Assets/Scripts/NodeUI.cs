@@ -18,6 +18,7 @@ public class NodeUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 //Debug.Log("HIHI");
                 Instantiate(draggedOBJ, transform.position, Quaternion.identity);
                 draggedOBJ.GetComponent<DraggedGrid>().type = type;
+                Debug.Log(type);
             }
         }
     }
