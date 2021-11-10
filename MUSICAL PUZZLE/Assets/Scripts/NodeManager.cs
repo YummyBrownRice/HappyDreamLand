@@ -191,13 +191,13 @@ public class NodeManager : MonoBehaviour
 
         for (int i = 0; i < inputDirections.Length; i++)
         {
-            int num = (inputDirections[i] + rotation) % 6;
+            int num = (inputDirections[i] + rotation + 6) % 6;
             inputDirections[i] = num;
         }
         Array.Sort(inputDirections);
         for (int i = 0; i < outputDirections.Length; i++)
         {
-            int num = (outputDirections[i] + rotation) % 6;
+            int num = (outputDirections[i] + rotation + 6) % 6;
             outputDirections[i] = num;
         }
         Array.Sort(outputDirections);

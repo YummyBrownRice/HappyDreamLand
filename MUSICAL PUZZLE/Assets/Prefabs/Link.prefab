@@ -54,4 +54,4 @@ MonoBehaviour:
   nodeType: 1
   rotation: 0
   inputDirections: 0200000004000000
-  outputDirections: 00000000
+  outputDirections: 050000000000000001000000
