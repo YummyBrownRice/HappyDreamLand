@@ -23,7 +23,7 @@ public class Delay : Node // Todo
             {
                 tempSequence[i] = input[0].sequence[i+1];
             }
-            tempSequence[0] = input[0].sequence[0];
+            tempSequence[input[0].sequence.Length - 1] = input[0].sequence[0];
         }
         Output = new Sequence(tempSequence);
     }

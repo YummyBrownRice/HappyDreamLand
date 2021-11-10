@@ -4,14 +4,8 @@
 		{
 			"coordinate":[0, -7, 7],
 			"type":0,
-			"rotation":2,
-			"sourceSound":[3, 0, 1, 2]
-		},
-		{
-			"coordinate":[0, -5, 5],
-			"type":0,
 			"rotation":0,
-			"sourceSound":[3, 0, 2]
+			"sourceSound":[1, 0, 1, 0]
 		}
 	],
 	"limitations":[
