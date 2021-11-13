@@ -107,7 +107,7 @@ public class NodeManager : MonoBehaviour
         {
             flag = !ExtractOutput(nodes[u].outputNodes[i], ref newSequences) && flag;
         }
-        if (flag && !nodes[u].extracted)
+        if (flag && !nodes[u].extracted && !nodes[u].muted)
         {
             newSequences.Add(nodes[u].Output);
             nodes[u].extracted = true;

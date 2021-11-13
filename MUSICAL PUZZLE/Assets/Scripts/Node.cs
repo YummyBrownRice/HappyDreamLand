@@ -24,6 +24,8 @@ public class Node : MonoBehaviour
 
     public int rotation;
 
+    public bool muted;
+
     public int[] inputDirections;
     public int[] outputDirections;
 

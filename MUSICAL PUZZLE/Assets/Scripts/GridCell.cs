@@ -8,6 +8,7 @@ public class GridCell : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public GameObject highlight;
     public Transform indicator;
+    public Transform muteIndicator;
 
     public Color inputColor;
     public Color outputColor;
@@ -32,7 +33,17 @@ public class GridCell : MonoBehaviour
 
     private void Update()
     {
-
+        if (Input.GetMouseButtonDown(1) && mouseOn)
+        {
+            //Debug.Log("HIHI");
+            if (connectedNode != null)
+            {
+                connectedNode.muted = !connectedNode.muted;
+                nodeManager.UpdateBeat();
+                muteIndicator.gameObject.SetActive(!muteIndicator.gameObject.activeInHierarchy);
+            }
+            
+        }
     }
 
     public void ConnectToNode(int index)
