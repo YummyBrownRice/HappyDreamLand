@@ -233,6 +233,7 @@ MonoBehaviour:
   Origin: {x: -4, y: -4}
   indexToCoordinate: []
   indexToGridcell: []
+  selectedCell: {fileID: 0}
 --- !u!4 &294821639
 Transform:
   m_ObjectHideFlags: 0
@@ -847,7 +848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267dc3747dc197e49a963a3d77ab38a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelFile: {fileID: 4900000, guid: 4790aa4b4b243974e8217e435a657c58, type: 3}
+  levelFile: {fileID: 4900000, guid: d0fb7955aee022a428343166070b11ed, type: 3}
 --- !u!114 &1942343277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -961,6 +962,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  isSource: 
   nodeKinds:
   - {fileID: 9122176493716190873, guid: 88d5db51a3e50704b9a2fb9c91b3a471, type: 3}
   - {fileID: 9122176493716190873, guid: 73b3686797ea32e499b45d211cfdf15f, type: 3}
@@ -972,7 +974,6 @@ MonoBehaviour:
   - {fileID: 9122176493716190873, guid: 6dd55041dac550345b24e7df93dfef00, type: 3}
   - {fileID: 9122176493716190873, guid: 78ff537e31020de43985e2f77fb31204, type: 3}
   - {fileID: 9122176493716190873, guid: 0480b57d1e8d15d4fad8ded71a3ee1d8, type: 3}
-  soundSourceCount: 2
 --- !u!4 &1942343278
 Transform:
   m_ObjectHideFlags: 0
