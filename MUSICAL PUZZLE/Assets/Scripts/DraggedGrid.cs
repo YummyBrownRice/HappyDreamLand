@@ -8,6 +8,7 @@ public class DraggedGrid : MonoBehaviour
     public int rotation;
 
     public GridCell OBJ;
+    public NodeUI linkedUI;
 
     private GridManager gridManager;
     private NodeManager nodeManager;
@@ -27,14 +28,23 @@ public class DraggedGrid : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
+            bool a_ = false;
             //Debug.Log("HIHI");
             if (gridManager.selectedCell != null)
             {
                 if (gridManager.selectedCell.connectedNode == null)
                 {
                     nodeManager.AddNode(nodeManager.nodeKinds[(int)type], gridManager.selectedCell.coordinate, type, rotation);
+                    a_ = true;
                 }
             }
+
+            if (!a_)
+            {
+                linkedUI.count++;
+                linkedUI.UpdateCountText();
+            }
+
             Destroy(gameObject);
         }
 

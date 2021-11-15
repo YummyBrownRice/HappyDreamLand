@@ -41,6 +41,7 @@ public class UIManager : MonoBehaviour
             go.transform.GetChild(0).GetComponent<TMP_Text>().text = limit.count.ToString();
             go.GetComponent<NodeUI>().draggedOBJ = draggedOBJ;
             go.GetComponent<NodeUI>().type = limit.type;
+            go.GetComponent<NodeUI>().count = limit.count;
             //go.transform.name = Pos.y;
         }
     }
