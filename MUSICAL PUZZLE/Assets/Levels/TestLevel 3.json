@@ -1,0 +1,49 @@
+{
+	"endGoal": [1, 3, 0, 1, 2],
+	"map":[
+		{
+			"coordinate":[2, -6, 4],
+			"type":0,
+			"rotation":0,
+			"sourceSound":[1, 0, 1, 0, 1, 0, 0]
+		}
+	],
+	"limitations":[
+		{
+			"type":1,
+			"count":0
+		},
+		{
+			"type":2,
+			"count":6
+		},
+		{
+			"type":3,
+			"count":1
+		},
+		{
+			"type":4,
+			"count":0
+		},
+		{
+			"type":5,
+			"count":0
+		},
+		{
+			"type":6,
+			"count":1
+		},
+		{
+			"type":7,
+			"count":6
+		},
+		{
+			"type":8,
+			"count":6
+		},
+		{
+			"type":9,
+			"count":3
+		}
+	]
+}
