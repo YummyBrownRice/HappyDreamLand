@@ -55,6 +55,8 @@ public class GridCell : MonoBehaviour
             GameObject OBJ = Instantiate(draggedOBJ, transform.position, Quaternion.identity);
             OBJ.GetComponent<DraggedGrid>().type = connectedNode.nodeType;
             OBJ.GetComponent<DraggedGrid>().linkedUI = uiManager.nodeUIs[(int)connectedNode.nodeType];
+            OBJ.GetComponent<DraggedGrid>().rotation = connectedNode.rotation;
+            OBJ.transform.Rotate(Vector3.forward * -60 * connectedNode.rotation);
 
             nodeManager.RemoveNode(connectedNode.index);
         }
