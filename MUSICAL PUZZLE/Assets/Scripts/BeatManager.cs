@@ -53,14 +53,6 @@ public class BeatManager : MonoBehaviour
                         playing[i] = true;
                     }
                 }
-                /*
-                int a = (int)sequence.sequence[index % (sequence.sequence.Length)] - 1;
-                if (a >= 0)
-                {
-                    audioSources[a].Play();
-                    Debug.Log("Played" + (Sequence.Beat)a);
-                }
-                */
             }
 
             for (int i = 0; i < audioSources.Length; i++)
