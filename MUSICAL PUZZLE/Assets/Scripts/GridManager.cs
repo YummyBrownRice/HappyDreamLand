@@ -31,6 +31,7 @@ public class GridManager : MonoBehaviour
                 indexToCoordinate.Add(coordinate);
                 indexToGridcell.Add(goGridcell);
                 goGridcell.coordinate = coordinate;
+                go.SetActive(false);
             }
             Origin = Origin + new Vector2(a * Mathf.Sqrt(3) / 2, Mathf.Pow(-1, i + 1) * (-a / 2));
             if (i % 2 == 0)

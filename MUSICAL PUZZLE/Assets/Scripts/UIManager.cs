@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     private NodeManager nodeManager;
     public List<LevelManager.Limitation> limits;
     public GameObject draggedOBJ;
+    public NodeUI[] nodeUIs = new NodeUI[100];
 
     public Transform content;
     public float spacing;
@@ -46,6 +47,8 @@ public class UIManager : MonoBehaviour
             {
                 go.transform.GetChild(1).gameObject.SetActive(true);
             }
+
+            nodeUIs[(int)limit.type] = go.GetComponent<NodeUI>();
             //go.transform.name = Pos.y;
         }
     }

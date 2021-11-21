@@ -17,6 +17,7 @@ public class NodeManager : MonoBehaviour
 
     public enum nodeType
     {
+        None=-1,
         SoundSource,
         Link,
         Inverse,
@@ -80,13 +81,24 @@ public class NodeManager : MonoBehaviour
 
         //TODO: Instantiate Nodes & Connect w/ grid
 
+        //Debug.Log(level.map.Count);
+
         foreach (var cell in level.map)
         {
-            Node nodeComp = AddNode(nodeKinds[(int)cell.type], cell.coordinate, cell.type, cell.rotation);
-            if (cell.type == nodeType.SoundSource)
+            //Debug.Log(cell.type);
+            gridManager.indexToGridcell[gridManager.indexToCoordinate.FindIndex(d => d == cell.coordinate)].gameObject.SetActive(true);
+            if (cell.type != nodeType.None)
             {
-                nodeComp.GetComponent<SoundSource>().sourceSound = cell.sourceSound;
+                Node nodeComp = AddNode(nodeKinds[(int)cell.type], cell.coordinate, cell.type, cell.rotation);
+                if (cell.type == nodeType.SoundSource)
+                {
+                    //Debug.Log("HEY");
+                    nodeComp.GetComponent<SoundSource>().sourceSound = cell.sourceSound;
+                }
+
+                gridManager.indexToGridcell[gridManager.indexToCoordinate.FindIndex(d => d == cell.coordinate)].locked = true;
             }
+
         }
 
         UpdateBeat();
@@ -173,6 +185,7 @@ public class NodeManager : MonoBehaviour
 
     public Node AddNode(GameObject obj, Vector3 coordinate, nodeType nodeType, int rotation = 0)
     {
+
         GameObject go = Instantiate(obj, new Vector3(0, 0, 0), Quaternion.identity, transform);
 
         int index_ = Array.IndexOf(nodes, null);

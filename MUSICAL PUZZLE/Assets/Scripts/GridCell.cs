@@ -18,17 +18,23 @@ public class GridCell : MonoBehaviour
     public int index;
     public Vector3 coordinate;
 
+    public bool locked = false;
+
     public NodeManager nodeManager;
     private GridManager gridManager;
+    private UIManager uiManager;
 
     public Node connectedNode;
 
     public bool mouseOn;
 
+    public GameObject draggedOBJ;
+
     public void Awake()
     {
         nodeManager = GameObject.Find("Nodes").GetComponent<NodeManager>();
         gridManager = GameObject.Find("GridManager").GetComponent<GridManager>();
+        uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
     private void Update()
@@ -43,6 +49,14 @@ public class GridCell : MonoBehaviour
                 muteIndicator.gameObject.SetActive(!muteIndicator.gameObject.activeInHierarchy);
             }
             
+        }
+        else if (Input.GetMouseButtonDown(0) && mouseOn && !locked)
+        {
+            GameObject OBJ = Instantiate(draggedOBJ, transform.position, Quaternion.identity);
+            OBJ.GetComponent<DraggedGrid>().type = connectedNode.nodeType;
+            OBJ.GetComponent<DraggedGrid>().linkedUI = uiManager.nodeUIs[(int)connectedNode.nodeType];
+
+            nodeManager.RemoveNode(connectedNode.index);
         }
     }
 
@@ -101,8 +115,11 @@ public class GridCell : MonoBehaviour
         mouseOn = true;
         gridManager.selectedCell = this;
         highlight.SetActive(true);
-        indicator.gameObject.SetActive(true);
-
+        if (connectedNode != null)
+        {
+            indicator.gameObject.SetActive(true);
+        }
+        
     }
 
     private void OnMouseExit()
