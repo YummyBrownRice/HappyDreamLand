@@ -42,6 +42,10 @@ public class UIManager : MonoBehaviour
             go.GetComponent<NodeUI>().draggedOBJ = draggedOBJ;
             go.GetComponent<NodeUI>().type = limit.type;
             go.GetComponent<NodeUI>().count = limit.count;
+            if (limit.count == 0)
+            {
+                go.transform.GetChild(1).gameObject.SetActive(true);
+            }
             //go.transform.name = Pos.y;
         }
     }
