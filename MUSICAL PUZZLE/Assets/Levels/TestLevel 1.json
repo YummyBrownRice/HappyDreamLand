@@ -1,0 +1,96 @@
+{
+	"endGoal": [1, 3, 0, 1, 2],
+	"map":[
+		{
+			"coordinate":[1, -5, 4],
+			"type":-1,
+			"rotation":0,
+			"sourceSound":[]
+		},
+		{
+			"coordinate":[2, -6, 4],
+			"type":0,
+			"rotation":0,
+			"sourceSound":[1, 0, 1, 0, 1, 0, 0]
+		},
+		{
+			"coordinate":[1, -4, 3],
+			"type":-1,
+			"rotation":0,
+			"sourceSound":[]
+		},
+		{
+			"coordinate":[3, -6, 3],
+			"type":-1,
+			"rotation":0,
+			"sourceSound":[]
+		},
+		{
+			"coordinate":[3, -5, 2],
+			"type":-1,
+			"rotation":0,
+			"sourceSound":[]
+		},
+		{
+			"coordinate":[2, -4, 2],
+			"type":-1,
+			"rotation":0,
+			"sourceSound":[]
+		},
+		{
+			"coordinate":[2, -3, 1],
+			"type":-1,
+			"rotation":0,
+			"sourceSound":[]
+		},
+		{
+			"coordinate":[2, -2, 0],
+			"type":-1,
+			"rotation":0,
+			"sourceSound":[]
+		},{
+			"coordinate":[2, -1, -1],
+			"type":-1,
+			"rotation":0,
+			"sourceSound":[]
+		}
+	],
+	"limitations":[
+		{
+			"type":1,
+			"count":0
+		},
+		{
+			"type":2,
+			"count":6
+		},
+		{
+			"type":3,
+			"count":1
+		},
+		{
+			"type":4,
+			"count":0
+		},
+		{
+			"type":5,
+			"count":0
+		},
+		{
+			"type":6,
+			"count":1
+		},
+		{
+			"type":7,
+			"count":6
+		},
+		{
+			"type":8,
+			"count":6
+		},
+		{
+			"type":9,
+			"count":3
+		}
+	]
+}
